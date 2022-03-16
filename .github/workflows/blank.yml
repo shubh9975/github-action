@@ -3,13 +3,23 @@ name: Docker image builder
 on:
   push:
     branches: 
-         - 'master'
+         - main
+         - dev
 jobs:
-   build:
+   if_main:
        runs-on: ubuntu-latest
-       if: github.ref == 'refs/heads/master'
+       if: github.ref == 'refs/heads/main'
        steps:
          - uses: actions/checkout@v2
          - run: |
-               echo "Welcome world"
+               echo "Branch = main"
                echo "Github Action"
+   if_dev:
+       runs-on: ubuntu-latest
+       if: github.ref == 'refs/heads/dev'
+       steps:
+         - uses: actions/checkout@v2
+         - run: |
+               echo "Bramnch = dev"
+               echo "Github Action"
+       
